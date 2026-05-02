@@ -1,41 +1,13 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import SeoNouvellesGlobalesSection from "@/components/home/SeoNouvellesGlobalesSection";
 import SiteHeader from "@/components/site/SiteHeader";
 import SiteFooter from "@/components/site/SiteFooter";
 import ProductCard from "@/components/site/ProductCard";
 import { applyPageSeo } from "@/lib/seo";
 import storefront from "@/assets/welma-storefront.png";
 import banner from "@/assets/welma-banner.jpg";
-import catElectro from "@/assets/cat-electromenager.jpg";
-import catMobilier from "@/assets/cat-mobilier.jpg";
-import catPhones from "@/assets/cat-telephones.jpg";
 import { whatsappContactUrl } from "@/lib/whatsapp";
 import { products } from "@/data/products";
-
-const categories = [
-  {
-    to: "/electromenager",
-    label: "Électroménager",
-    desc: "Réfrigérateurs, TV, climatiseurs…",
-    img: catElectro,
-    count: products.filter((p) => p.category === "electromenager").length,
-  },
-  {
-    to: "/mobilier",
-    label: "Mobilier",
-    desc: "Chambres, salons, tables…",
-    img: catMobilier,
-    count: products.filter((p) => p.category === "mobilier").length,
-  },
-  {
-    to: "/telephones",
-    label: "Téléphones",
-    desc: "Smartphones & accessoires",
-    img: catPhones,
-    count: products.filter((p) => p.category === "telephones").length,
-  },
-];
 
 const featured = [
   products.find((p) => p.slug === "phone-flagship-black"),
@@ -47,9 +19,9 @@ const featured = [
 const Index = () => {
   useEffect(() => {
     applyPageSeo({
-      title: "Nouvelles globales & Welma Global — WELMA Electronic | Dakar",
+      title: "Welma Global — WELMA Electronic | Électroménager, mobilier & téléphones, Dakar",
       description:
-        "Nouvelles globales en temps réel : veille électroménager, mobilier & tech. Welma Global — WELMA Electronic, Ouest Foire Dakar. Commande WhatsApp.",
+        "Welma Global, WELMA Electronic à Ouest Foire, Dakar : électroménager, mobilier, smartphones et accessoires. Commandez par WhatsApp, livraison à Dakar.",
       path: "/",
     });
   }, []);
@@ -65,7 +37,7 @@ const Index = () => {
             <div className="absolute inset-0 gradient-hero" />
           </div>
 
-          <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:py-16 md:grid-cols-2 md:gap-10 md:py-28">
+          <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 py-10 sm:py-12 md:grid-cols-2 md:gap-8 md:py-16">
             <div className="relative">
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
                 <span className="relative flex h-2 w-2" aria-hidden="true">
@@ -75,7 +47,7 @@ const Index = () => {
                 Dakar — Sénégal
               </span>
               <h1 className="mt-4 text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:mt-5 md:text-5xl lg:text-6xl">
-                Nouvelles globales en temps réel
+                Votre maison équipée, simplement
               </h1>
               <p className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
                 <span className="bg-clip-text text-transparent gradient-primary">WELMA GLOBAL</span>
@@ -83,8 +55,7 @@ const Index = () => {
                 <span className="text-lg font-semibold text-foreground sm:text-xl md:text-2xl">WELMA Electronic</span>
               </p>
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg md:mt-5 md:text-xl">
-                L&apos;électroménager, le mobilier et la tech à portée de main — avec une veille sur les{" "}
-                <span className="font-medium text-foreground">nouvelles globales</span> produit pour vous guider.
+                Électroménager, mobilier et téléphones sélectionnés pour vous à Dakar.
                 <span className="font-semibold text-foreground"> Une commande, un message WhatsApp.</span>
               </p>
               <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
@@ -120,13 +91,13 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-xl">
+            <div className="relative mx-auto w-full max-w-xl md:max-h-[min(52vh,28rem)]">
               <div className="absolute -inset-3 rounded-[2rem] gradient-primary opacity-30 blur-2xl sm:-inset-4" aria-hidden="true" />
-              <div className="relative overflow-hidden rounded-2xl border border-border/60 shadow-elegant sm:rounded-[2rem]">
+              <div className="relative max-h-[min(48vh,22rem)] overflow-hidden rounded-2xl border border-border/60 shadow-elegant sm:max-h-[min(50vh,26rem)] sm:rounded-[2rem] md:max-h-none">
                 <img
                   src={storefront}
                   alt="Devanture illuminée de la boutique WELMA Electronic à Ouest Foire, Dakar, de nuit, avec enseignes néon bleues et rouges et clients à l'intérieur"
-                  className="block h-full w-full object-cover"
+                  className="block h-full max-h-[min(48vh,22rem)] w-full object-cover sm:max-h-[min(50vh,26rem)] md:max-h-none"
                   width={1200}
                   height={900}
                   loading="eager"
@@ -153,48 +124,6 @@ const Index = () => {
               loading="lazy"
               decoding="async"
             />
-          </div>
-        </section>
-
-        <SeoNouvellesGlobalesSection />
-
-        <section className="mx-auto max-w-6xl px-4 py-20">
-          <div className="mb-12 flex items-end justify-between gap-6">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary">Explorer</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Nos catégories</h2>
-            </div>
-            <p className="hidden max-w-sm text-right text-sm text-muted-foreground md:block">
-              Parcourez nos collections soigneusement sélectionnées pour la maison et le bureau.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {categories.map((c) => (
-              <Link
-                key={c.to}
-                to={c.to}
-                className="group relative block aspect-[4/5] overflow-hidden rounded-3xl shadow-soft transition-smooth hover:-translate-y-1 hover:shadow-elegant"
-              >
-                <img
-                  src={c.img}
-                  alt={c.label}
-                  className="h-full w-full object-cover transition-smooth duration-700 group-hover:scale-110"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                <span className="absolute right-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-primary backdrop-blur">
-                  {c.count} produits
-                </span>
-                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                  <h3 className="text-2xl font-bold">{c.label}</h3>
-                  <p className="mt-1 text-sm opacity-90">{c.desc}</p>
-                  <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold backdrop-blur transition-smooth group-hover:bg-white group-hover:text-primary">
-                    Découvrir →
-                  </span>
-                </div>
-              </Link>
-            ))}
           </div>
         </section>
 
