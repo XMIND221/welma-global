@@ -9,6 +9,7 @@ const Electromenager = () => (
     heroImage={hero}
     metaTitle="Électroménager — WELMA GLOBAL Dakar"
     metaDescription="Réfrigérateurs, congélateurs, téléviseurs, climatiseurs et plus, livrés à Dakar."
+    canonicalPath="/electromenager"
   />
 );
 

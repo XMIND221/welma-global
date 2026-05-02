@@ -9,6 +9,7 @@ const Mobilier = () => (
     heroImage={hero}
     metaTitle="Mobilier — WELMA GLOBAL Dakar"
     metaDescription="Chambres à coucher, salons, tables — du mobilier élégant pour votre intérieur à Dakar."
+    canonicalPath="/mobilier"
   />
 );
 

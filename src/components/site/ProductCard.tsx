@@ -24,6 +24,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             src={src}
             alt={product.name}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-smooth group-hover:scale-105"
           />
         )}

@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { type Product, products } from "@/data/products";
+import { applyPageSeo } from "@/lib/seo";
 import ProductCard from "./ProductCard";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
@@ -11,9 +12,19 @@ type Props = {
   heroImage: string;
   metaTitle?: string;
   metaDescription?: string;
+  /** Chemin pour canonical & Open Graph (ex. /electromenager) */
+  canonicalPath: string;
 };
 
-const CategoryPage = ({ title, tagline, category, heroImage, metaTitle, metaDescription }: Props) => {
+const CategoryPage = ({
+  title,
+  tagline,
+  category,
+  heroImage,
+  metaTitle,
+  metaDescription,
+  canonicalPath,
+}: Props) => {
   const items = useMemo(() => products.filter((p) => p.category === category), [category]);
   const subs = useMemo(
     () => ["Tous", ...Array.from(new Set(items.map((p) => p.subcategory)))],
@@ -41,7 +52,14 @@ const CategoryPage = ({ title, tagline, category, heroImage, metaTitle, metaDesc
       <main className="pb-12">
         <section className="relative overflow-hidden">
           <div className="absolute inset-0">
-            <img src={heroImage} alt="" className="h-full w-full object-cover" loading="eager" />
+            <img
+              src={heroImage}
+              alt={`Catalogue ${title} — Welma Global, WELMA Electronic Dakar`}
+              className="h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
           </div>
           <div className="relative mx-auto max-w-6xl px-4 py-16 md:py-24">

@@ -9,6 +9,7 @@ const Telephones = () => (
     heroImage={hero}
     metaTitle="Téléphones & Accessoires — WELMA GLOBAL Dakar"
     metaDescription="Smartphones, écouteurs et accessoires mobiles à Dakar. Commandez sur WhatsApp."
+    canonicalPath="/telephones"
   />
 );
 

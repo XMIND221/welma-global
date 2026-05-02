@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import SeoNouvellesGlobalesSection from "@/components/home/SeoNouvellesGlobalesSection";
 import SiteHeader from "@/components/site/SiteHeader";
 import SiteFooter from "@/components/site/SiteFooter";
 import ProductCard from "@/components/site/ProductCard";
+import { applyPageSeo } from "@/lib/seo";
 import storefront from "@/assets/welma-storefront.png";
 import banner from "@/assets/welma-banner.jpg";
 import catElectro from "@/assets/cat-electromenager.jpg";
@@ -44,35 +46,12 @@ const featured = [
 
 const Index = () => {
   useEffect(() => {
-    const origin = window.location.origin;
-    document.title =
-      "Welma Global — WELMA Electronic | Électroménager, mobilier & téléphones à Dakar";
-    let tag = document.querySelector('meta[name="description"]');
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.setAttribute("name", "description");
-      document.head.appendChild(tag);
-    }
-    tag.setAttribute(
-      "content",
-      "Welma Global (WELMA Electronic) : boutique à Dakar — électroménager, mobilier, téléphones et accessoires. Commande sur WhatsApp.",
-    );
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute("href", `${origin}/`);
-    const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (!ogUrl) {
-      const m = document.createElement("meta");
-      m.setAttribute("property", "og:url");
-      document.head.appendChild(m);
-      m.setAttribute("content", `${origin}/`);
-    } else {
-      ogUrl.setAttribute("content", `${origin}/`);
-    }
+    applyPageSeo({
+      title: "Nouvelles globales & Welma Global — WELMA Electronic | Dakar",
+      description:
+        "Nouvelles globales en temps réel : veille électroménager, mobilier & tech. Welma Global — WELMA Electronic, Ouest Foire Dakar. Commande WhatsApp.",
+      path: "/",
+    });
   }, []);
 
   return (
@@ -95,12 +74,17 @@ const Index = () => {
                 </span>
                 Dakar — Sénégal
               </span>
-              <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:mt-5 md:text-7xl">
-                WELMA{" "}
-                <span className="bg-clip-text text-transparent gradient-primary">GLOBAL</span>
+              <h1 className="mt-4 text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:mt-5 md:text-5xl lg:text-6xl">
+                Nouvelles globales en temps réel
               </h1>
+              <p className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+                <span className="bg-clip-text text-transparent gradient-primary">WELMA GLOBAL</span>
+                <span className="mx-2 text-muted-foreground/40">·</span>
+                <span className="text-lg font-semibold text-foreground sm:text-xl md:text-2xl">WELMA Electronic</span>
+              </p>
               <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg md:mt-5 md:text-xl">
-                L'électroménager, le mobilier et la tech à portée de main.
+                L&apos;électroménager, le mobilier et la tech à portée de main — avec une veille sur les{" "}
+                <span className="font-medium text-foreground">nouvelles globales</span> produit pour vous guider.
                 <span className="font-semibold text-foreground"> Une commande, un message WhatsApp.</span>
               </p>
               <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
@@ -143,7 +127,11 @@ const Index = () => {
                   src={storefront}
                   alt="Devanture illuminée de la boutique WELMA Electronic à Ouest Foire, Dakar, de nuit, avec enseignes néon bleues et rouges et clients à l'intérieur"
                   className="block h-full w-full object-cover"
+                  width={1200}
+                  height={900}
                   loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-4 sm:p-5">
                   <p className="text-[11px] font-semibold uppercase tracking-widest text-white sm:text-xs">Notre boutique</p>
@@ -160,10 +148,15 @@ const Index = () => {
               src={banner}
               alt="Bannière WELMA Électronique : la technologie au service de votre quotidien — Adresse Ouest Foire, Téléphone 776 508 080"
               className="block w-full object-cover"
+              width={1600}
+              height={400}
               loading="lazy"
+              decoding="async"
             />
           </div>
         </section>
+
+        <SeoNouvellesGlobalesSection />
 
         <section className="mx-auto max-w-6xl px-4 py-20">
           <div className="mb-12 flex items-end justify-between gap-6">
@@ -186,6 +179,8 @@ const Index = () => {
                   src={c.img}
                   alt={c.label}
                   className="h-full w-full object-cover transition-smooth duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                 <span className="absolute right-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-primary backdrop-blur">
