@@ -1,0 +1,276 @@
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import SiteHeader from "@/components/site/SiteHeader";
+import SiteFooter from "@/components/site/SiteFooter";
+import ProductCard from "@/components/site/ProductCard";
+import storefront from "@/assets/welma-storefront.png";
+import banner from "@/assets/welma-banner.jpg";
+import catElectro from "@/assets/cat-electromenager.jpg";
+import catMobilier from "@/assets/cat-mobilier.jpg";
+import catPhones from "@/assets/cat-telephones.jpg";
+import { whatsappContactUrl } from "@/lib/whatsapp";
+import { products } from "@/data/products";
+
+const categories = [
+  {
+    to: "/electromenager",
+    label: "Électroménager",
+    desc: "Réfrigérateurs, TV, climatiseurs…",
+    img: catElectro,
+    count: products.filter((p) => p.category === "electromenager").length,
+  },
+  {
+    to: "/mobilier",
+    label: "Mobilier",
+    desc: "Chambres, salons, tables…",
+    img: catMobilier,
+    count: products.filter((p) => p.category === "mobilier").length,
+  },
+  {
+    to: "/telephones",
+    label: "Téléphones",
+    desc: "Smartphones & accessoires",
+    img: catPhones,
+    count: products.filter((p) => p.category === "telephones").length,
+  },
+];
+
+const featured = [
+  products.find((p) => p.slug === "phone-flagship-black"),
+  products.find((p) => p.slug === "hisense-rd23dc"),
+  products.find((p) => p.slug === "salon-broadway"),
+  products.find((p) => p.slug === "phone-overear"),
+].filter(Boolean) as typeof products;
+
+const Index = () => {
+  useEffect(() => {
+    const origin = window.location.origin;
+    document.title =
+      "Welma Global — WELMA Electronic | Électroménager, mobilier & téléphones à Dakar";
+    let tag = document.querySelector('meta[name="description"]');
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute("name", "description");
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute(
+      "content",
+      "Welma Global (WELMA Electronic) : boutique à Dakar — électroménager, mobilier, téléphones et accessoires. Commande sur WhatsApp.",
+    );
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", `${origin}/`);
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (!ogUrl) {
+      const m = document.createElement("meta");
+      m.setAttribute("property", "og:url");
+      document.head.appendChild(m);
+      m.setAttribute("content", `${origin}/`);
+    } else {
+      ogUrl.setAttribute("content", `${origin}/`);
+    }
+  }, []);
+
+  return (
+    <>
+      <SiteHeader />
+      <main>
+        <section className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full gradient-primary opacity-30 blur-3xl" />
+            <div className="absolute -right-32 top-1/3 h-[400px] w-[400px] rounded-full bg-whatsapp opacity-20 blur-3xl" />
+            <div className="absolute inset-0 gradient-hero" />
+          </div>
+
+          <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:py-16 md:grid-cols-2 md:gap-10 md:py-28">
+            <div className="relative">
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
+                <span className="relative flex h-2 w-2" aria-hidden="true">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                Dakar — Sénégal
+              </span>
+              <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:mt-5 md:text-7xl">
+                WELMA{" "}
+                <span className="bg-clip-text text-transparent gradient-primary">GLOBAL</span>
+              </h1>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg md:mt-5 md:text-xl">
+                L'électroménager, le mobilier et la tech à portée de main.
+                <span className="font-semibold text-foreground"> Une commande, un message WhatsApp.</span>
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
+                <Link
+                  to="/electromenager"
+                  className="group inline-flex items-center gap-2 rounded-2xl bg-foreground px-5 py-3 text-sm font-semibold text-background shadow-elegant transition-smooth hover:-translate-y-0.5 hover:shadow-glow sm:px-6 sm:py-3.5"
+                >
+                  Voir le catalogue
+                  <span className="transition-smooth group-hover:translate-x-1" aria-hidden="true">→</span>
+                </Link>
+                <a
+                  href={whatsappContactUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Contacter WELMA GLOBAL sur WhatsApp"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-whatsapp px-5 py-3 text-sm font-semibold text-whatsapp-foreground shadow-soft transition-smooth hover:-translate-y-0.5 hover:opacity-95 sm:px-6 sm:py-3.5"
+                >
+                  <span aria-hidden="true">💬</span> WhatsApp
+                </a>
+              </div>
+
+              <div className="mt-8 grid max-w-md grid-cols-3 gap-3 sm:gap-4 md:mt-10">
+                {[
+                  { v: `${products.length}+`, l: "Produits" },
+                  { v: "3", l: "Catégories" },
+                  { v: "24/7", l: "WhatsApp" },
+                ].map((s) => (
+                  <div key={s.l} className="rounded-2xl border border-border/60 bg-card/80 p-3 text-center backdrop-blur">
+                    <div className="text-lg font-bold text-primary sm:text-xl md:text-2xl">{s.v}</div>
+                    <div className="text-[11px] uppercase tracking-wider text-muted-foreground">{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative mx-auto w-full max-w-xl">
+              <div className="absolute -inset-3 rounded-[2rem] gradient-primary opacity-30 blur-2xl sm:-inset-4" aria-hidden="true" />
+              <div className="relative overflow-hidden rounded-2xl border border-border/60 shadow-elegant sm:rounded-[2rem]">
+                <img
+                  src={storefront}
+                  alt="Devanture illuminée de la boutique WELMA Electronic à Ouest Foire, Dakar, de nuit, avec enseignes néon bleues et rouges et clients à l'intérieur"
+                  className="block h-full w-full object-cover"
+                  loading="eager"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent p-4 sm:p-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-white sm:text-xs">Notre boutique</p>
+                  <p className="text-base font-bold text-white sm:text-lg">Ouest Foire — Dakar</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-4 pt-2 sm:pt-4">
+          <div className="overflow-hidden rounded-2xl border border-border/60 shadow-soft sm:rounded-3xl">
+            <img
+              src={banner}
+              alt="Bannière WELMA Électronique : la technologie au service de votre quotidien — Adresse Ouest Foire, Téléphone 776 508 080"
+              className="block w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-4 py-20">
+          <div className="mb-12 flex items-end justify-between gap-6">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary">Explorer</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Nos catégories</h2>
+            </div>
+            <p className="hidden max-w-sm text-right text-sm text-muted-foreground md:block">
+              Parcourez nos collections soigneusement sélectionnées pour la maison et le bureau.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {categories.map((c) => (
+              <Link
+                key={c.to}
+                to={c.to}
+                className="group relative block aspect-[4/5] overflow-hidden rounded-3xl shadow-soft transition-smooth hover:-translate-y-1 hover:shadow-elegant"
+              >
+                <img
+                  src={c.img}
+                  alt={c.label}
+                  className="h-full w-full object-cover transition-smooth duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                <span className="absolute right-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-primary backdrop-blur">
+                  {c.count} produits
+                </span>
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <h3 className="text-2xl font-bold">{c.label}</h3>
+                  <p className="mt-1 text-sm opacity-90">{c.desc}</p>
+                  <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold backdrop-blur transition-smooth group-hover:bg-white group-hover:text-primary">
+                    Découvrir →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-secondary/40 py-20">
+          <div className="mx-auto max-w-6xl px-4">
+            <div className="mb-10 flex items-end justify-between gap-6">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-primary">Sélection</p>
+                <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Produits vedettes</h2>
+              </div>
+              <Link to="/electromenager" className="hidden text-sm font-semibold text-primary hover:underline md:inline">
+                Tout voir →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {featured.map((p) => (
+                <ProductCard key={p.slug} product={p} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-4 py-20">
+          <div className="mb-12 text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary">Pourquoi WELMA</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Une expérience d'achat simple</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              { i: "📦", t: "Large choix", d: "Réfrigérateurs, TV, mobilier, téléphones et bien plus." },
+              { i: "💬", t: "Commande WhatsApp", d: "Un message suffit pour passer commande, sans paperasse." },
+              { i: "🚚", t: "Livraison à Dakar", d: "Livraison rapide dans toute la région de Dakar." },
+            ].map((f) => (
+              <div
+                key={f.t}
+                className="group relative overflow-hidden rounded-3xl border border-border/50 bg-card p-7 shadow-soft transition-smooth hover:-translate-y-1 hover:shadow-elegant"
+              >
+                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full gradient-primary opacity-0 blur-2xl transition-smooth group-hover:opacity-30" />
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-2xl">
+                  {f.i}
+                </div>
+                <h3 className="text-lg font-semibold text-foreground">{f.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.d}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="px-4 pb-20">
+          <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl gradient-primary p-10 text-center shadow-elegant md:p-16">
+            <div className="absolute inset-0 opacity-20 [background:radial-gradient(circle_at_30%_20%,white,transparent_50%)]" />
+            <h2 className="relative text-3xl font-bold text-primary-foreground md:text-4xl">
+              Prêt à passer commande ?
+            </h2>
+            <p className="relative mx-auto mt-3 max-w-xl text-primary-foreground/90">
+              Notre équipe répond à vos questions et finalise votre commande sur WhatsApp en quelques minutes.
+            </p>
+            <a
+              href={whatsappContactUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative mt-7 inline-flex items-center gap-2 rounded-2xl bg-background px-7 py-4 text-base font-semibold text-primary shadow-glow transition-smooth hover:-translate-y-0.5"
+            >
+              💬 Démarrer la conversation
+            </a>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
+  );
+};
+
+export default Index;

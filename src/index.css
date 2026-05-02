@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* WELMA GLOBAL design system — all colors in HSL */
+
+@layer base {
+  :root {
+    --background: 220 60% 99%;
+    --foreground: 230 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 30% 15%;
+
+    --primary: 222 70% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 220 80% 65%;
+    --primary-soft: 220 80% 96%;
+
+    --whatsapp: 142 70% 49%;
+    --whatsapp-foreground: 0 0% 100%;
+
+    --secondary: 220 30% 96%;
+    --secondary-foreground: 230 30% 15%;
+
+    --muted: 220 30% 96%;
+    --muted-foreground: 230 18% 32%;
+
+    --accent: 220 80% 96%;
+    --accent-foreground: 222 70% 45%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 90%;
+    --input: 220 20% 90%;
+    --ring: 222 70% 45%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(220 70% 98%) 0%, hsl(222 60% 92%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 50% 98%) 100%);
+
+    --shadow-soft: 0 1px 2px hsl(230 30% 15% / 0.05), 0 4px 12px hsl(230 30% 15% / 0.05);
+    --shadow-elegant: 0 4px 16px -4px hsl(222 70% 45% / 0.18), 0 12px 40px -8px hsl(222 70% 45% / 0.22);
+    --shadow-glow: 0 8px 32px -8px hsl(222 70% 45% / 0.4);
+
+    --transition-smooth: all 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dark {
+    --background: 230 30% 8%;
+    --foreground: 220 30% 96%;
+    --card: 230 25% 12%;
+    --card-foreground: 220 30% 96%;
+    --popover: 230 25% 12%;
+    --popover-foreground: 220 30% 96%;
+    --primary: 220 80% 65%;
+    --primary-foreground: 230 30% 8%;
+    --primary-glow: 220 80% 75%;
+    --primary-soft: 222 40% 18%;
+    --whatsapp: 142 70% 49%;
+    --whatsapp-foreground: 0 0% 100%;
+    --secondary: 230 20% 18%;
+    --secondary-foreground: 220 30% 96%;
+    --muted: 230 20% 18%;
+    --muted-foreground: 220 15% 65%;
+    --accent: 222 40% 18%;
+    --accent-foreground: 220 80% 75%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 230 20% 22%;
+    --input: 230 20% 22%;
+    --ring: 220 80% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .bg-whatsapp {
+    background-color: hsl(var(--whatsapp));
+  }
+  .text-whatsapp {
+    color: hsl(var(--whatsapp));
+  }
+  .text-whatsapp-foreground {
+    color: hsl(var(--whatsapp-foreground));
+  }
+  .bg-primary-soft {
+    background-color: hsl(var(--primary-soft));
+  }
+  .text-primary-glow {
+    color: hsl(var(--primary-glow));
+  }
+}
